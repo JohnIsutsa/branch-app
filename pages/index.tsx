@@ -88,7 +88,7 @@ export default function Home() {
         <div className={styles.usernameWrapper}>
           <div className={styles.usernameInner}>
             <input type="email" ref={emailref} placeholder="Enter email..." />
-            <button className="cta" onClick={handleEmail}>START</button>
+            <button className="cta" onClick={handleEmail}>LOG IN</button>
           </div>
         </div>
 
