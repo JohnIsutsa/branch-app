@@ -6,4 +6,12 @@ function getAPIBaseUrl(): string {
     return baseUrl;
 }
 
+export function getSocketUrl(): string {
+    const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL;
+    if (!socketUrl) {
+        throw new Error('Socket URL is not defined in environment variables');
+    }
+    return socketUrl;
+}
+
 export default getAPIBaseUrl;

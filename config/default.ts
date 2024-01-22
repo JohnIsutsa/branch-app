@@ -1,1 +1,3 @@
-export const SOCKET_URL = process.env.SOCKET_URL || 'http://localhost:9902';
+import { getSocketUrl } from "@/utils/env.util";
+
+export const SOCKET_URL = `${getSocketUrl()}` || 'http://localhost:9902';
