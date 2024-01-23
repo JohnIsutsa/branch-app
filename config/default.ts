@@ -1,3 +1,3 @@
-import { getSocketUrl } from "@/utils/env.util";
+import getAPIBaseUrl from "@/utils/env.util";
 
-export const SOCKET_URL = `${getSocketUrl()}` || 'http://localhost:9902';
+export const SOCKET_URL = `${getAPIBaseUrl()}/chat` || 'http://localhost:9900/chat';
