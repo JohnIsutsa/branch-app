@@ -72,7 +72,7 @@ Before you begin, ensure you have the following installed:
 
     The application will be running at `http://localhost:3000`.
 
-5. For test accounts use the following:
+5. For test accounts use the following (both in prod and dev environments):
    ```plaintext
    AGENT Sign In: james@branch.com
    CUSTOMER Sign In: Any customer email that will be on the tickets listed on the agent dashboard.
