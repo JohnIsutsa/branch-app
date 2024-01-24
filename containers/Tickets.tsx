@@ -116,7 +116,8 @@ const TicketsContainer = () => {
         localStorage.removeItem('user');
         localStorage.removeItem('role');
         localStorage.removeItem('email');
-        window.location.reload();
+        localStorage.removeItem('user_uuid');
+        window.location.reload();   
     }
 
     const handleMouseOver = (uuid: string) => () => {
