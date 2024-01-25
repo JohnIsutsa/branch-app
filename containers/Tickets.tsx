@@ -21,6 +21,7 @@ const TicketsContainer = () => {
     const [prevPage, setPrevPage] = useState<string>('');
     const [ticketTypeFilter, setTicketTypeFilter] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [selectedTicket, setSelectedTicket] = useState('');
 
     const ticketTitleRef = React.useRef<HTMLInputElement>(null);
     const ticketDescriptionRef = React.useRef<HTMLTextAreaElement>(null);
@@ -53,7 +54,7 @@ const TicketsContainer = () => {
         const stringifiedMessages = JSON.stringify(ticketResponse.data);
         const ticket: Ticket = JSON.parse(stringifiedMessages);
 
-        console.log(ticket);
+        
 
         socket.emit(EVENTS.CLIENT.NEW_TICKET, ticket);
 
@@ -72,18 +73,19 @@ const TicketsContainer = () => {
         // set the roomID state to the uuid of the ticket
         // emit the onJoin event to the server
         // redirect the user to the messages page
-        console.log('Ticket clicked: ', uuid);
+        
         setRoomId(uuid);
+        setSelectedTicket(uuid);
         const response = await getMessagesByTicket(uuid);
         const stringifiedMessages = JSON.stringify(response.data);
         const responseMessages: Message[] = JSON.parse(stringifiedMessages);
-        console.log(responseMessages);
+        
         setMessages(responseMessages);
 
         const ticketResponse = await getTicketByUuid(uuid);
         const stringifiedTicket = JSON.stringify(ticketResponse.data);
         const ticket: Ticket = JSON.parse(stringifiedTicket);
-        console.log(ticket);
+        
         setCurrentTicket(ticket);
 
         socket.emit(EVENTS.CLIENT.JOIN_CHAT, { ticket_uuid: uuid });
@@ -122,7 +124,7 @@ const TicketsContainer = () => {
 
     const handleMouseOver = (uuid: string) => () => {
         const ticketElement = document.getElementById(uuid);
-        console.log('Ticket hovered: ', ticketElement);
+        
         if (ticketElement) {
             ticketElement.classList.remove(styles['ticket']);
             ticketElement.classList.add(styles['ticket-hovered']);
@@ -151,7 +153,7 @@ const TicketsContainer = () => {
 
                 const stringifiedTickets = JSON.stringify(response.data.data);
                 const tickets: Ticket[] = JSON.parse(stringifiedTickets);
-                console.log('Tickets', tickets);
+                
                 setTicketsLocal(tickets);
             } catch (error) {
                 console.error('Error fetching previous page:', error);
@@ -163,7 +165,7 @@ const TicketsContainer = () => {
         if (page < totalPages && nextPage) {
             try {
                 const response = await axios.get(nextPage);
-                console.log('Response', response)
+                
                 const stringifiedResponse = JSON.stringify(response.data);
                 const parsedResponse = JSON.parse(stringifiedResponse);
 
@@ -174,7 +176,7 @@ const TicketsContainer = () => {
 
                 const stringifiedTickets = JSON.stringify(response.data.data);
                 const tickets: Ticket[] = JSON.parse(stringifiedTickets);
-                console.log('Tickets', tickets);
+                
                 setTicketsLocal(tickets);
             } catch (error) {
                 console.error('Error fetching next page:', error);
@@ -228,7 +230,7 @@ const TicketsContainer = () => {
 
                 const stringifiedTickets = JSON.stringify(response.data);
                 const tickets: Ticket[] = JSON.parse(stringifiedTickets);
-                console.log('Tickets', tickets);
+                
                 setTicketsLocal(tickets);
             } catch (error) {
                 console.error('Error fetching tickets:', error);
@@ -269,7 +271,7 @@ const TicketsContainer = () => {
                     {ticketsLocal.map((ticket) => (
                         <div
                             key={ticket.uuid}
-                            className={styles.ticket}
+                            className={`${styles.ticket} ${selectedTicket === ticket.uuid ? styles.selected : ''}`}
                             onClick={() => handleClickedTicket(ticket.uuid)}
                             onMouseOver={() => handleMouseOver(ticket.uuid)}
                             onMouseOut={() => handleMouseOut(ticket.uuid)}
