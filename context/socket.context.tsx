@@ -47,7 +47,7 @@ const SocketsProvider = (props: any) => {
     }, []);
 
     socket.on(EVENTS.SERVER.NEW_TICKET, (data): void => {
-        console.log('New ticket created event: ', data)
+        
         setTickets((tickets) => [...tickets, data])
         // setRooms([...rooms, data])
     
@@ -83,7 +83,7 @@ const SocketsProvider = (props: any) => {
                 })
                 document.title = 'New message...'
             }
-            console.log('New message: ', data)
+            
 
             setMessages((messages) => [...messages, data])
         })

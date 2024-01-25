@@ -35,7 +35,7 @@ const MessagesContainer = () => {
             sender_uuid: parsedUser.uuid,
         }
 
-        console.log('VALUE', value);
+        
 
         socket.emit(EVENTS.CLIENT.NEW_MESSAGE, value);
 
@@ -43,13 +43,8 @@ const MessagesContainer = () => {
     }
 
     const handleStatusChange = async (newStatus: TicketStatus) => {
-        // Perform any additional logic here if needed
-        console.log('New status:', newStatus);
-
-        // You can send a patch request to the server to update the ticket status
-        // Example: updateTicketStatus(currentTicket.uuid, newStatus);
         const response = await updateTicket(currentTicket!.uuid, { status: newStatus })
-        console.log('RESPONSE ',response);
+        
         const stringifiedTicket = JSON.stringify(response.data);
         const ticket: Ticket = JSON.parse(stringifiedTicket);
         setCurrentTicket(ticket);

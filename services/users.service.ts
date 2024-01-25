@@ -4,7 +4,6 @@ import { AxiosResponse } from "axios";
 
 export const getUserByEmail = async (email: string) => {
     const response: AxiosResponse<GetUserResponse> = await restInstance.get<GetUserResponse>(`/users/email/${email}`);
-    console.log("getUserByEmail response:", response);
     checkForError(response);
     return response?.data;
 }

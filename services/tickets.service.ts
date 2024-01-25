@@ -27,18 +27,6 @@ export const createTicket = async (ticket: CreateTicketDto) => {
 export const updateTicket = async (uuid: string, ticket: UpdateTicketDto) => {
 
     const response = await restInstance.patch<GetTicketsResponse>(`/tickets/${uuid}`, ticket);
-    console.log(response)
     return response?.data;
 
 }
-
-// export const getTickets = async (): Promise<GetTicketsResponse | undefined> => {
-//     try {
-//         const response = await axios.get<GetTicketsResponse>(`${process.env.NEXT_PUBLIC_API_URL}/api/tickets`);
-//         console.log("Tickets response:", response);
-//         return response.data;
-//     } catch (error) {
-//         console.error("Error fetching tickets:", error);
-//         return undefined;
-//     }
-// };

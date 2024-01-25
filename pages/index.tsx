@@ -27,7 +27,7 @@ export default function Home() {
       const response = await getUserByEmail(value);
       const stringifiedUser = JSON.stringify(response.data);
       const user: User = JSON.parse(stringifiedUser);
-      console.log(user.role);
+      
 
       // Set the email in the socket context
       setEmail(value);
@@ -57,7 +57,7 @@ export default function Home() {
         });
         document.title = "New message...";
       }
-      console.log("New message: ", data);
+      
     });
 
     const user = localStorage.getItem("user");
